@@ -28,4 +28,4 @@ gulp
 * Add two-way bindings.
 
 ### Step 4
-* Add loading on AJAX calls.
+* Add loading on AJAX calls - use signals or promises.
