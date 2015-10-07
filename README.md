@@ -7,7 +7,7 @@ gulp
 ```
 
 ## Preview
-http://localhost:8080
+[http://localhost:8080](http://localhost:8080)
 
 ## Steps
 ### Step 1
