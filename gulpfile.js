@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
-var browserify = require('browserify');
 var connect = require('gulp-connect');
 var rt = require('gulp-react-templates');
 var sourcemaps = require('gulp-sourcemaps');
