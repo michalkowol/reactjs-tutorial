@@ -1,4 +1,4 @@
-# ReactJs Tutorial
+# ReactJS Tutorial
 
 ## Build
 ```bash
