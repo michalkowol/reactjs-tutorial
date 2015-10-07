@@ -4,10 +4,13 @@
   "devDependencies": {
     "bower": "1.5.x",
     "browserify": "11.2.x",
+    "del": "2.0.x",
     "gulp": "3.9.x",
     "gulp-babel": "5.2.x",
     "gulp-connect": "2.2.x",
-    "gulp-react-templates": "0.1.x"
+    "gulp-react-templates": "0.1.x",
+    "gulp-sourcemaps": "1.6.x",
+    "run-sequence": "1.1.x"
   },
   "scripts": {
     "postinstall": "bower install"
