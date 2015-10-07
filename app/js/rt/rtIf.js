@@ -1,11 +1,11 @@
-var OpenClose = React.createClass({
+import template from './rtIf.rt';
+
+export const OpenClose = React.createClass({
   getInitialState() {
     return {open: false};
   },
   toggle() {
     this.setState({open: !this.state.open});
   },
-  render: rtIfRT
+  render: template
 });
-
-React.render(<OpenClose />, document.getElementById('rt-if'));

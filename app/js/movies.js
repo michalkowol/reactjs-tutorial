@@ -1,16 +1,16 @@
-var MOVIES = [
-  {name: 'Interstellar', genre: 'SiFi', forChildren: true},
+export const MOVIES = [
+  {name: 'Interstellar', genre: 'SciFi', forChildren: true},
   {name: 'Titanic', genre: 'Drama', forChildren: true},
   {name: 'The Wolf of Wall Street', genre: 'Comedy', forChildren: false},
-  {name: 'Avengers', genre: 'SiFi', forChildren: true},
-  {name: 'Terminator Genisys', genre: 'SiFi', forChildren: false},
+  {name: 'Avengers', genre: 'SciFi', forChildren: true},
+  {name: 'Terminator Genisys', genre: 'SciFi', forChildren: false},
   {name: 'Top Gun', genre: 'Drama', forChildren: true},
-  {name: 'Iron Man', genre: 'SiFi', forChildren: true},
+  {name: 'Iron Man', genre: 'SciFi', forChildren: true},
   {name: 'Forrest Gump', genre: 'Drama', forChildren: true},
   {name: 'Mission: Impossible', genre: 'Drama', forChildren: true}
 ];
 
-var MOVIES_BIG = [
+export const MOVIES_BIG = [
   {forChildren: false, name: 'Lost Tales from Camp Blood: Part 6', genre: 'Drama'},
   {forChildren: false, name: 'Madagascar 3: Europe\'s Most Wanted', genre: 'Drama'},
   {forChildren: true, name: 'The Last Kiss', genre: 'Drama'},
