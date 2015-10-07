@@ -1,17 +1,14 @@
 var gulp = require('gulp');
 var babel = require('gulp-babel');
-var browserify = require('browserify');
-var babelify = require('babelify');
-var sourcemaps = require('gulp-sourcemaps');
 var connect = require('gulp-connect');
-var source = require('vinyl-source-stream');
+var rt = require('gulp-react-templates');
+var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
 var runSequence = require('run-sequence');
-var rt = require('react-templatify');
 
 var paths = {
   scripts: 'app/js/**/*.js',
-  reactTemplates: 'app/js/**/*.rt',
+  ractTemplates: 'app/js/**/*.rt',
   htmls: ['app/index.html']
 };
 
@@ -24,9 +21,19 @@ gulp.task('clean-bower', function() {
 });
 
 gulp.task('js', function () {
-  return browserify({entries: './app/js/app.js', debug: true, transform: [babelify, rt]})
-    .bundle()
-    .pipe(source('bundle.js'))
+  return gulp.src(paths.scripts)
+    .pipe(sourcemaps.init())
+    .pipe(babel())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('dist/js'))
+    .pipe(connect.reload());
+});
+
+gulp.task('rt', function() {
+  return gulp.src(paths.ractTemplates)
+    .pipe(sourcemaps.init())
+    .pipe(rt({modules: 'none'}))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('dist/js'))
     .pipe(connect.reload());
 });
@@ -53,12 +60,12 @@ gulp.task('connect', function () {
 gulp.task('watch', function () {
   gulp.watch(paths.htmls, ['html']);
   gulp.watch(paths.scripts, ['js']);
-  gulp.watch(paths.reactTemplates, ['js']);
+  gulp.watch(paths.ractTemplates, ['rt']);
 });
 
-gulp.task('build', ['bower', 'js', 'html']);
+gulp.task('build', ['bower', 'js', 'html', 'rt']);
 gulp.task('dist', function (callback) {
-  runSequence('clean-dist', 'build', 'clean-bower', callback);
+  runSequence('clean', 'build', callback);
 });
 gulp.task('server', ['build', 'connect', 'watch']);
 gulp.task('default', ['server']);
