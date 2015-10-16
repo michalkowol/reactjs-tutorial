@@ -1,4 +1,4 @@
-# ReactJS Tutorial
+# [ReactJS](https://facebook.github.io/react/) Tutorial
 
 ## Build
 ```bash
@@ -29,3 +29,20 @@ gulp
 
 ### Step 4
 * Add loading on AJAX calls - use signals or promises.
+
+### Step 5
+* Use [Flux](https://github.com/facebook/flux) architecture.
+
+## References
+* https://facebook.github.io/react/
+* https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html#what-components-should-have-state
+* https://facebook.github.io/react/docs/thinking-in-react.html
+* https://github.com/michalkowol/reactjs-tutorial
+* https://github.com/uberVU/react-guide/blob/master/props-vs-state.md
+* https://speakerdeck.com/vjeux/react-css-in-js
+* https://github.com/planningcenter/react-patterns
+* http://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html
+* https://facebook.github.io/react-native/
+* http://blog.500tech.com/is-reactjs-fast/
+* https://facebook.github.io/react/blog/page12/
+* http://calendar.perfplanet.com/2013/diff/

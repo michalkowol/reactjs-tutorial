@@ -1,12 +1,12 @@
-var Hello = React.createClass({
+const Hello = React.createClass({
   render() {
     return <h1>Hello {this.props.name}!</h1>
   }
 });
 
-var FilterableMovieTable = React.createClass({render() { return <div /> }});
-var SearchBar = React.createClass({render() { return <div /> }});
-var MovieTable = React.createClass({render() { return <div /> }});
-var MovieRow = React.createClass({render() { return <div /> }});
+const FilterableMovieTable = React.createClass({render() { return <div /> }});
+const SearchBar = React.createClass({render() { return <div /> }});
+const MovieTable = React.createClass({render() { return <div /> }});
+const MovieRow = React.createClass({render() { return <div /> }});
 
 React.render(<Hello name={'Michal'} />, document.getElementById('step0'));

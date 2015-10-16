@@ -1,4 +1,4 @@
-var FilterableMovieTable = React.createClass({
+const FilterableMovieTable = React.createClass({
   getInitialState() {
     return {
       searchText: '',
@@ -22,7 +22,7 @@ var FilterableMovieTable = React.createClass({
   }
 });
 
-var SearchBar = React.createClass({
+const SearchBar = React.createClass({
   render() {
     return (
         <div>
@@ -34,12 +34,12 @@ var SearchBar = React.createClass({
   }
 });
 
-var MovieTable = React.createClass({
+const MovieTable = React.createClass({
   render() {
-    var filteredMovies = _.filter(this.props.movies, movie => {
+    const filteredMovies = _.filter(this.props.movies, movie => {
       return (movie.forChildren || this.props.forChildren === movie.forChildren) && movie.name.indexOf(this.props.searchText) !== -1;
     });
-    var rows = _.map(filteredMovies, movie => {
+    const rows = _.map(filteredMovies, movie => {
       return <MovieRow movie={movie}/>
     });
     return (
@@ -54,9 +54,9 @@ var MovieTable = React.createClass({
   }
 });
 
-var MovieRow = React.createClass({
+const MovieRow = React.createClass({
   render() {
-    var name = this.props.movie.forChildren ? this.props.movie.name : <span style={{color: 'red'}}>{this.props.movie.name}</span>;
+    const name = this.props.movie.forChildren ? this.props.movie.name : <span style={{color: 'red'}}>{this.props.movie.name}</span>;
     return (
         <tr>
           <td>{name}</td>

@@ -1,4 +1,4 @@
-var MOVIES = [
+const MOVIES = [
   {name: 'Interstellar', genre: 'SciFi', forChildren: true},
   {name: 'Titanic', genre: 'Drama', forChildren: true},
   {name: 'The Wolf of Wall Street', genre: 'Comedy', forChildren: false},
@@ -8,9 +8,9 @@ var MOVIES = [
   {name: 'Iron Man', genre: 'SciFi', forChildren: true},
   {name: 'Forrest Gump', genre: 'Drama', forChildren: true},
   {name: 'Mission: Impossible', genre: 'Drama', forChildren: true}
-]
+];
 
-var MOVIES_BIG = [
+const MOVIES_BIG = [
   {forChildren: false, name: 'Lost Tales from Camp Blood: Part 6', genre: 'Drama'},
   {forChildren: false, name: 'Madagascar 3: Europe\'s Most Wanted', genre: 'Drama'},
   {forChildren: true, name: 'The Last Kiss', genre: 'Drama'},
