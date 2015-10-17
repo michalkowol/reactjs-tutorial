@@ -1,15 +1,96 @@
-const FilterableMovieTable = React.createClass({
-  onUserInput(searchText, forChildren) {
-    this.setState({
-      searchText: searchText,
-      forChildren: forChildren
+const MOVIE_SEARCH_TEXT_CHANGED = 'MOVIE_SEARCH_TEXT_CHANGED';
+const MOVIE_FOR_CHILDREN = 'MOVIE_FOR_CHILDREN';
+const MOVIES_FOR_ALL = 'MOVIES_FOR_ALL';
+const LOAD_MOVIES = 'LOAD_MOVIES';
+
+const AppDispatcher = new Flux.Dispatcher();
+
+const SearchActions = {
+  changeSearchText(newText) {
+    AppDispatcher.dispatch({
+      actionType: MOVIE_SEARCH_TEXT_CHANGED,
+      searchText: newText
     });
   },
-  onMovieLoad(movies) {
-    this.setState({movies: movies});
+  toggleMoviesForChildren(forChildren) {
+    AppDispatcher.dispatch({
+      actionType: forChildren ? MOVIE_FOR_CHILDREN : MOVIES_FOR_ALL
+    });
+  },
+  loadMovies(movies) {
+    AppDispatcher.dispatch({
+      actionType: LOAD_MOVIES,
+      movies: movies
+    });
+  }
+};
+
+const SearchStore = (function () {
+
+  var movies = [];
+  var searchText = '';
+  var forChildren = false;
+  const changed = new signals.Signal();
+
+  AppDispatcher.register(function (action) {
+    switch(action.actionType) {
+      case MOVIE_SEARCH_TEXT_CHANGED:
+        searchText = action.searchText;
+        changed.dispatch();
+        break;
+      case MOVIE_FOR_CHILDREN:
+        forChildren = true;
+        changed.dispatch();
+        break;
+      case MOVIES_FOR_ALL:
+        forChildren = false;
+        changed.dispatch();
+        break;
+      case LOAD_MOVIES:
+        movies = action.movies;
+        changed.dispatch();
+        break;
+      default:
+      // no op
+    }
+  });
+
+  function getMovies() {
+    return movies;
+  }
+
+  function isForChildren() {
+    return forChildren;
+  }
+
+  function getSearchText() {
+    return searchText;
+  }
+
+  function addChangeListener(fn) {
+    changed.add(fn);
+  }
+
+  return {
+    addChangeListener: addChangeListener,
+    getMovies: getMovies,
+    isForChildren: isForChildren,
+    getSearchText: getSearchText
+  };
+})();
+
+
+
+const FilterableMovieTable = React.createClass({
+  onChange() {
+    this.setState({
+      movies: SearchStore.getMovies(),
+      searchText: SearchStore.getSearchText(),
+      forChildren: SearchStore.isForChildren()
+    });
   },
   componentDidMount() {
-    this.props.moviesLoadSignal.add(this.onMovieLoad);
+    SearchStore.addChangeListener(this.onChange);
   },
   getInitialState() {
     return {
@@ -24,7 +105,6 @@ const FilterableMovieTable = React.createClass({
           <SearchBar
               searchText={this.state.searchText}
               forChildren={this.state.forChildren}
-              onUserInput={this.onUserInput}
               />
           <MovieTable
               movies={this.state.movies}
@@ -37,17 +117,20 @@ const FilterableMovieTable = React.createClass({
 });
 
 const SearchBar = React.createClass({
-  handleUserInput() {
-    const searchText = this.refs.SearchInput.getDOMNode().value;
-    const forChildren = this.refs.ForChildrenInput.getDOMNode().checked;
-    this.props.onUserInput(searchText, forChildren);
+  forChildrenCheckboxChanged() {
+    const forChildren = React.findDOMNode(this.refs.ForChildrenInput).checked;
+    SearchActions.toggleMoviesForChildren(forChildren);
+  },
+  searchTextChanged() {
+    const searchText = React.findDOMNode(this.refs.SearchInput).value;
+    SearchActions.changeSearchText(searchText);
   },
   render() {
     return (
         <div>
-          <input type="text" placeholder="Search..." value={this.props.searchText} onChange={this.handleUserInput} ref="SearchInput"/>
+          <input type="text" placeholder="Search..." value={this.props.searchText} onChange={this.searchTextChanged} ref="SearchInput"/>
 
-          <p><input type="checkbox" checked={this.props.forChildren} onChange={this.handleUserInput} ref="ForChildrenInput"/> Movie for children</p>
+          <p><input type="checkbox" checked={this.props.forChildren} onChange={this.forChildrenCheckboxChanged} ref="ForChildrenInput"/> Movie for children</p>
         </div>
     );
   }
@@ -85,6 +168,5 @@ const MovieRow = React.createClass({
   }
 });
 
-const moviesLoadSignal = new signals.Signal();
-React.render(<FilterableMovieTable moviesLoadSignal={moviesLoadSignal}/>, document.getElementById('demo'));
-moviesLoadSignal.dispatch(MOVIES);
+React.render(<FilterableMovieTable />, document.getElementById('demo'));
+SearchActions.loadMovies(MOVIES);
