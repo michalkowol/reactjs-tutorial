@@ -33,6 +33,9 @@ gulp
 ### Step 5
 * Use [Flux](https://github.com/facebook/flux) architecture.
 
+### Step 6
+* Use [Flux](https://github.com/facebook/flux) pattern but without Flux library.
+
 ## References
 * https://facebook.github.io/react/
 * https://facebook.github.io/react/docs/interactivity-and-dynamic-uis.html#what-components-should-have-state
@@ -46,3 +49,4 @@ gulp
 * http://blog.500tech.com/is-reactjs-fast/
 * https://facebook.github.io/react/blog/page12/
 * http://calendar.perfplanet.com/2013/diff/
+* https://github.com/facebook/flux
